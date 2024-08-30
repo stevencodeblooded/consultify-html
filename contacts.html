@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Info Grid</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .company-card {
+            height: 100%;
+        }
+        .contact-info p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h1 class="fs-4 fw-bold lh-sm">
+                        Increase Your Business Revenues With Our Fintech Development
+                        Services
+                    </h1>
+                </div>
+                <div class="col-lg-8">
+                    <p class="fs-6">
+                        We offer comprehensive fintech software development services
+                        designed to elevate your business and increase your revenue. As a
+                        fintech software development agency, our expertise in end-to-end
+                        fintech application design and development ensures that your
+                        innovative ideas are transformed into agile and robust
+                        applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-5" id="companyGrid">
+            <!-- Company cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const companyData = [
+            { location: 'USA', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'India', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'India', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'USA', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'India', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'India', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+        ];
+
+        function createCompanyCard(company) {
+            return `
+                <div class="col-md-6 col-lg-4">
+                    <div class="company-card h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <p class="company-location fw-bold">${company.location}</p>
+                            <p>${company.name}</p>
+                            <p>The software development landscape is constantly evolving, and the pressure...</p>
+                        </div>
+                        <div class="contact-info">
+                            <p>${company.email}</p>
+                            <p>${company.phone}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCompanyGrid() {
+            const gridContainer = document.getElementById('companyGrid');
+            const gridHTML = companyData.map(company => createCompanyCard(company)).join('');
+            gridContainer.innerHTML = gridHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCompanyGrid);
+    </script>
+</body>
+</html>

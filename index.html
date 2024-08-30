@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .nav-link {
+            color: #000 !important;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+            font-weight: 600;
+        }
+
+        .navContainer {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbarHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .navbarCollapse {
+            transition: max-height 0.5s ease-out, opacity 0.4s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .navbarCollapse.show {
+            max-height: 500px; /* Adjust this value based on your content */
+            opacity: 1;
+        }
+
+        .navbarNav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .navItem {
+            margin-bottom: 0.5rem;
+            width: 100%;
+        }
+
+        .navLink {
+            color: black !important;
+            transition: color 0.3s ease;
+            text-decoration: none !important;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .navLink:hover {
+            color: #2fe647 !important;
+        }
+
+        .scheduleCall {
+            display: flex;
+            align-items: center;
+        }
+
+        .greenText {
+            color: #2fe647 !important;
+        }
+
+        .greenText:hover {
+            color: #20c936 !important;
+        }
+
+        .arrowIcon {
+            margin-left: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .scheduleCall:hover .arrowIcon {
+            transform: translate(2px, -2px);
+        }
+
+        .navbarToggler {
+            border: none;
+            outline: none;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .navbarToggler:focus {
+            box-shadow: none;
+        }
+
+        @media (min-width: 992px) {
+            .navContainer {
+                flex-direction: row;
+            }
+
+            .navbarHeader {
+                width: auto;
+            }
+
+            .navbarCollapse {
+                max-height: none !important;
+                opacity: 1 !important;
+                overflow: visible;
+                width: auto;
+            }
+
+            .navbarNav {
+                flex-direction: row;
+                align-items: center;
+                margin-top: 0;
+            }
+
+            .navItem {
+                margin-bottom: 0;
+                margin-left: 1rem;
+                width: auto;
+            }
+
+            .navLink {
+                padding: 0.5rem 0;
+            }
+
+            .navbarToggler {
+                display: none;
+            }
+        }
+
+        .partnerSection {
+            position: relative;
+            padding-bottom: 30vh; 
+            padding-top: 30px;
+        }
+
+        .heroTitle {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .textGreen {
+            color: #2fe647;
+            cursor: pointer;
+        }
+
+        .imageContainer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .fullWidthImage {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            .heroTitle {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .heroTitle {
+                font-size: 4.5rem;
+            }
+            
+            .partnerSection {
+                padding-bottom: 40vh; 
+            }
+        }
+
+        .testimonialCard {
+      height: 100%;
+    }
+    .contentColumn {
+      position: relative;
+      padding-right: 30px;
+    }
+    .testimonialContent {
+      max-width: 85%;
+    }
+    @media (max-width: 991px) {
+      .testimonialContent {
+        max-width: 100%; 
+      }
+    }
+    .ratingsColumn {
+      position: relative;
+    }
+    .ratingsColumn::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background-color: #e9ecef;
+    }
+    .ratingDot {
+      height: 14px;
+      width: 14px;
+      background-color: #2fe647;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+    }
+    .ratingDot.empty {
+      background-color: #e9ecef;
+    }
+    .cardFooter {
+      border-top: 1px solid rgba(0,0,0,.125);
+      padding: 0.75rem 1.25rem;
+    }
+    .tag {
+      display: inline-block;
+      padding: 0.25em 0.4em;
+      font-size: 75%;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: 0.25rem;
+      color: #212529;
+      margin-right: 0.5rem;
+    }
+
+    .dashboardContainer {
+      width: 100%;
+      position: relative;
+      margin-block: 40px;
+      aspect-ratio: 16 / 9; /* Adjust this ratio to match your image's aspect ratio */
+      max-height: 700px; /* Maximum height for larger screens */
+    }
+
+    .dashboardImage {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboardContainer {
+        aspect-ratio: 4 / 3; /* Adjust for a more square ratio on mobile */
+        max-height: none; /* Remove max-height restriction on mobile */
+      }
+    }
+
+    .card {
+      height: 100%;
+      box-shadow: none;
+      border: none;
+      background-color: transparent;
+    }
+
+    .give-border {
+      border: 1px solid #ccc;
+    }
+
+    .imageWrapper {
+      position: relative;
+      height: 200px;
+    }
+
+    .cardImage {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+
+    .cardBody {
+      padding: 1rem 0;
+    }
+
+    .cardTitle {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .cardText {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .readMore {
+      color: #2fe647;
+      text-decoration: none;
+    }
+
+    .readMore:hover {
+      text-decoration: underline;
+    }
+
+    .imageWrapper {
+      position: relative;
+      height: 200px;
+    }
+
+    .cardImage {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+
+    .cardBody {
+      padding: 1rem 0;
+    }
+
+    .cardTitle {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .cardText {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .readMore {
+      color: #2fe647;
+      text-decoration: none;
+    }
+
+    .readMore:hover {
+      text-decoration: underline;
+    }
+
+    .sticky-column {
+      transition: all 0.3s ease;
+    }
+  
+    .fixed {
+      position: fixed;
+      top: 20px;
+    }
+  
+    .read-more {
+      color: #2fe647;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+  
+    .read-more:hover {
+      text-decoration: underline;
+    }
+  
+    @media (max-width: 991px) {
+      .sticky-column {
+        position: static !important;
+        width: auto !important;
+      }
+    }
+
+    .gen-card {
+            border: none;
+            margin-bottom: 20px;
+        }
+        
+        .card-body-data {
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-img-left {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .read-more {
+            color: #2fe647;
+            text-decoration: none;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .contactContainer {
+            background-color: #f8f8f8;
+        }
+        
+        .contactInfoSection {
+            margin-top: 20px;
+        }
+        
+        .contactInfo {
+            margin-bottom: 20px;
+        }
+        
+        .contactInfo h4 {
+            font-weight: 700;
+        }
+        
+        .formControl {
+            padding: 10px;
+            border-radius: 6px;
+            background-color: white;
+            border: 1px solid #ced4da;
+        }
+        
+        .submitBtn {
+            background-color: #00c142;
+            color: white;
+            border-radius: 8px;
+            padding: 12px 40px;
+            border: none;
+            width: 100%;
+            font-weight: 600;
+        }
+        
+        .submitBtn:hover {
+            background-color: #00a83a;
+        }
+        
+        @media (max-width: 991px) {
+            .formSection {
+                margin-top: 20px;
+            }
+        }
+
+        .marqueeContainer {
+            width: 100%;
+            overflow: hidden;
+            margin-block: 30px;
+        }
+
+        .rectangle {
+            width: 200px;
+            height: 100px;
+            border: 2px solid #808080;
+            border-radius: 4px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topHalf, .bottomHalf {
+            height: 50%;
+        }
+
+        .gray {
+            background-color: #f0f0f0;
+        }
+
+        .marquee {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+
+        .marquee-reverse {
+            display: flex;
+            animation: scroll-reverse 20s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes scroll-reverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .content-section {
+            /* padding: 2rem 0; */
+            overflow: hidden;
+        }
+        
+        .text-content {
+            font-family: Arial, sans-serif;
+        }
+        
+        .image-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .read-more {
+            color: #2fe647;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        .arrow {
+            margin-left: 5px;
+            transition: margin-left 0.2s ease-in-out;
+        }
+        
+        .read-more:hover .arrow {
+            margin-left: 10px;
+        }
+
+        .service-card-finn {
+            border: 1px solid #ddd;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .service-card-finn:hover,
+        .service-card-finn.selected {
+            border-color: #2fe647;
+        }
+
+        .service-card-finn:hover .service-title,
+        .service-card-finn.selected .service-title {
+            color: #2fe647;
+        }
+
+        .service-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .service-description {
+            flex-grow: 1;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .arrow-icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #2fe647;
+            transition: all 0.3s ease;
+        }
+
+        .service-card-finn:hover .arrow-icon {
+            transform: translateX(5px);
+        }
+
+        .company-card {
+            height: 100%;
+        }
+        .contact-info p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div>
+        <p class="container" style="font-size: 12px; text-align: right; margin-top: 2px;">
+            India . United State . Bahamas
+        </p>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container navContainer">
+                <div class="navbarHeader">
+                    <a href="/" class="navbar-brand">
+                        <img src="/assets/logo.svg" alt="Logo" width="150" height="50" />
+                    </a>
+                    <button
+                        class="navbar-toggler navbarToggler"
+                        type="button"
+                        onclick="toggleNavbar()"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="navbarCollapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="navItem">
+                            <a href="#" class="navLink" onclick="toggleNavbar()">About</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#" class="navLink" onclick="toggleNavbar()">Solutions</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#" class="navLink" onclick="toggleNavbar()">Industries</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#" class="navLink" onclick="toggleNavbar()">Hire Developer</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#" class="navLink" onclick="toggleNavbar()">Blogs</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#" class="navLink scheduleCall greenText" onclick="toggleNavbar()">
+                                | Schedule call
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="partnerSection">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <h1 id="heroTitle" class="heroTitle"></h1>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ctaBox mb-3">
+                        <h5 class="textGreen">
+                            Do you want to build a Project with Expert Team
+                            <span class="float-end"><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8.293 11.293a1 1 0 0 1 0-1.414L11.586 7H2a1 1 0 0 1 0-2h9.586L8.293 2.707a1 1 0 1 1 1.414-1.414l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0z"/></svg></span>
+                        </h5>
+                        <p class="text-muted small">
+                            Are you ready to boost your company's technical capabilities with the help of AI developers?
+                        </p>
+                    </div>
+                    <hr />
+                    <div class="ctaBox">
+                        <h5 class="textGreen">
+                            Looking for Expert Fintech Developer
+                            <span class="float-end"><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8.293 11.293a1 1 0 0 1 0-1.414L11.586 7H2a1 1 0 0 1 0-2h9.586L8.293 2.707a1 1 0 1 1 1.414-1.414l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0z"/></svg></span>
+                        </h5>
+                        <p class="text-muted small">
+                            Are you ready to boost your company's technical capabilities with the help of AI developers?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="imageContainer">
+            <img 
+                src="assets/hero.svg" 
+                alt="City buildings" 
+                class="fullWidthImage"
+            />
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5">
+        <div class="container mb-3">
+          <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <h1 class="fs-4 fw-bold lh-sm">
+                Increase Your Business Revenues With Our Fintech Development Services
+              </h1>
+            </div>
+            <div class="col-lg-8">
+              <p class="fs-6">
+                We offer comprehensive fintech software development services
+                designed to elevate your business and increase your revenue. As a
+                fintech software development agency, our expertise in end-to-end
+                fintech application design and development ensures that your
+                innovative ideas are transformed into agile and robust
+                applications.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="card give-border mt-3 testimonialCard">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-8 mb-3 mb-lg-0 contentColumn">
+                  <h5 class="card-title">Emily Williams</h5>
+                  <p class="card-subtitle mb-2 text-muted">Manager at ApneeCommunity</p>
+                  <p class="card-text testimonialContent">
+                    Signity Solutions produces high-quality deliverables rapidly. They are highly accessible, responsive, and receptive to feedback. Their expertise and excellent communication make collaboration effortless.
+                  </p>
+                </div>
+                <div class="col-lg-4 ratingsColumn">
+                  <h6>Rating Breakdown</h6>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Quality</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Schedule & Timing</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Communication</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Overall Rating</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cardFooter">
+              <span class="tag">Fintech</span>
+              <span class="tag">Mobile Wallet Development</span>
+              <span class="tag">Team Hiring</span>
+            </div>
+          </div>
+          <div class="card give-border mt-3 testimonialCard">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-8 mb-3 mb-lg-0 contentColumn">
+                  <h5 class="card-title">Emily Williams</h5>
+                  <p class="card-subtitle mb-2 text-muted">Manager at ApneeCommunity</p>
+                  <p class="card-text testimonialContent">
+                    Signity Solutions produces high-quality deliverables rapidly. They are highly accessible, responsive, and receptive to feedback. Their expertise and excellent communication make collaboration effortless.
+                  </p>
+                </div>
+                <div class="col-lg-4 ratingsColumn">
+                  <h6>Rating Breakdown</h6>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Quality</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Schedule & Timing</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Communication</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Overall Rating</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cardFooter">
+              <span class="tag">Fintech</span>
+              <span class="tag">Mobile Wallet Development</span>
+              <span class="tag">Team Hiring</span>
+            </div>
+          </div>
+          <div class="card  give-border mt-3 testimonialCard">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-8 mb-3 mb-lg-0 contentColumn">
+                  <h5 class="card-title">Emily Williams</h5>
+                  <p class="card-subtitle mb-2 text-muted">Manager at ApneeCommunity</p>
+                  <p class="card-text testimonialContent">
+                    Signity Solutions produces high-quality deliverables rapidly. They are highly accessible, responsive, and receptive to feedback. Their expertise and excellent communication make collaboration effortless.
+                  </p>
+                </div>
+                <div class="col-lg-4 ratingsColumn">
+                  <h6>Rating Breakdown</h6>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Quality</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Schedule & Timing</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Communication</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Overall Rating</span>
+                    <div>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot empty"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cardFooter">
+              <span class="tag">Fintech</span>
+              <span class="tag">Mobile Wallet Development</span>
+              <span class="tag">Team Hiring</span>
+            </div>
+          </div>
+      
+          <!-- Repeat above card structure for other testimonials -->
+      
+        </div>
+      </section>
+
+
+      <!-- Dashboard -->
+      <div class="container">
+        <div class="dashboardContainer">
+          <img src="/assets/dashboard.svg" alt="Dashboard" class="dashboardImage">
+        </div>
+      </div>
+
+      <!-- Blog Cards 1 -->
+      <section>
+        <div class="container mb-5">
+          <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <h1 class="fs-4 fw-bold lh-sm">
+                Increase Your Business Revenues With Our Fintech Development Services
+              </h1>
+            </div>
+            <div class="col-lg-8">
+              <p class="fs-6">
+                We offer comprehensive fintech software development services designed to elevate your business and increase your revenue. As a fintech software development agency, our expertise in end-to-end fintech application design and development ensures that your innovative ideas are transformed into agile and robust applications.
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="container pb-5">
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+              <div class="card h-100">
+                <div class="imageWrapper">
+                  <img src="/assets/genAi.svg" class="cardImage" alt="AI Image 1">
+                </div>
+                <div class="cardBody">
+                  <h5 class="cardTitle">How can Gen AI accelerate and transform your SDLC?</h5>
+                  <p class="cardText">The software development landscape is constantly evolving, and the pressure...</p>
+                  <a href="#" class="readMore">Read more →</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="imageWrapper">
+                  <img src="/assets/genAi2.svg" class="cardImage" alt="AI Image 2">
+                </div>
+                <div class="cardBody">
+                  <h5 class="cardTitle">How can Gen AI accelerate and transform your SDLC?</h5>
+                  <p class="cardText">The software development landscape is constantly evolving, and the pressure...</p>
+                  <a href="#" class="readMore">Read more →</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="imageWrapper">
+                  <img src="/assets/genAi3.svg" class="cardImage" alt="AI Image 3">
+                </div>
+                <div class="cardBody">
+                  <h5 class="cardTitle">How can Gen AI accelerate and transform your SDLC?</h5>
+                  <p class="cardText">The software development landscape is constantly evolving, and the pressure...</p>
+                  <a href="#" class="readMore">Read more →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Blog Cards 2 -->
+      <section>
+        <div class="container mb-5">
+          <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <h1 class="fs-4 fw-bold lh-sm">
+                Increase Your Business Revenues With Our Fintech Development Services
+              </h1>
+            </div>
+            <div class="col-lg-8">
+              <p class="fs-6">
+                We offer comprehensive fintech software development services designed to elevate your business and increase your revenue. As a fintech software development agency, our expertise in end-to-end fintech application design and development ensures that your innovative ideas are transformed into agile and robust applications.
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="container pb-5">
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+              <div class="card h-100">
+                <div class="imageWrapper">
+                  <img src="/assets/genAi.svg" class="cardImage" alt="AI Image 1">
+                </div>
+                <div class="cardBody">
+                  <h5 class="cardTitle">How can Gen AI accelerate and transform your SDLC?</h5>
+                  <p class="cardText">The software development landscape is constantly evolving, and the pressure...</p>
+                  <a href="#" class="readMore">Read more →</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="imageWrapper">
+                  <img src="/assets/genAi2.svg" class="cardImage" alt="AI Image 2">
+                </div>
+                <div class="cardBody">
+                  <h5 class="cardTitle">How can Gen AI accelerate and transform your SDLC?</h5>
+                  <p class="cardText">The software development landscape is constantly evolving, and the pressure...</p>
+                  <a href="#" class="readMore">Read more →</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="imageWrapper">
+                  <img src="/assets/genAi3.svg" class="cardImage" alt="AI Image 3">
+                </div>
+                <div class="cardBody">
+                  <h5 class="cardTitle">How can Gen AI accelerate and transform your SDLC?</h5>
+                  <p class="cardText">The software development landscape is constantly evolving, and the pressure...</p>
+                  <a href="#" class="readMore">Read more →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FintechServices -->
+      <section class="py-5">
+        <div class="container sticky-part" id="container">
+          <div class="row">
+            <div class="col-lg-4 sticky-wrapper" id="sticky-wrapper">
+              <div class="sticky-column" id="sticky-column">
+                <h1 class="display-4 fs-4 fw-bold">
+                  Increase Your Business Revenues With Our Fintech Development Services
+                </h1>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <p class="mb-5">
+                We offer comprehensive fintech software development services designed to elevate your business and increase your revenue. As a fintech software development agency, our expertise in end-to-end fintech application design and development ensures that your innovative ideas are transformed into agile and robust applications.
+              </p>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="service-card h-100 d-flex flex-column">
+                    <h3 class="fs-5 fw-bold">Financial Software Development</h3>
+                    <p>Our financial software development services provide extensive technical and strategic support to fintech companies. We ensure your business objectives are met with precision.</p>
+                    <div class="mt-auto">
+                      <a href="#" class="read-more">Read more →</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="service-card h-100 d-flex flex-column">
+                    <h3 class="fs-5 fw-bold">Mobile Banking Software Development</h3>
+                    <p>As a leading fintech software development company, we assist tech vendors in planning and implementing sophisticated mobile banking solutions. Our approach ensures the creation of secure and user-friendly mobile banking applications.</p>
+                    <div class="mt-auto">
+                      <a href="#" class="read-more">Read more →</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="service-card h-100 d-flex flex-column">
+                    <h3 class="fs-5 fw-bold">Financial Software Development</h3>
+                    <p>Our financial software development services provide extensive technical and strategic support to fintech companies. We ensure your business objectives are met with precision.</p>
+                    <div class="mt-auto">
+                      <a href="#" class="read-more">Read more →</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="service-card h-100 d-flex flex-column">
+                    <h3 class="fs-5 fw-bold">Mobile Banking Software Development</h3>
+                    <p>As a leading fintech software development company, we assist tech vendors in planning and implementing sophisticated mobile banking solutions. Our approach ensures the creation of secure and user-friendly mobile banking applications.</p>
+                    <div class="mt-auto">
+                      <a href="#" class="read-more">Read more →</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="service-card h-100 d-flex flex-column">
+                    <h3 class="fs-5 fw-bold">Financial Software Development</h3>
+                    <p>Our financial software development services provide extensive technical and strategic support to fintech companies. We ensure your business objectives are met with precision.</p>
+                    <div class="mt-auto">
+                      <a href="#" class="read-more">Read more →</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="service-card h-100 d-flex flex-column">
+                    <h3 class="fs-5 fw-bold">Mobile Banking Software Development</h3>
+                    <p>As a leading fintech software development company, we assist tech vendors in planning and implementing sophisticated mobile banking solutions. Our approach ensures the creation of secure and user-friendly mobile banking applications.</p>
+                    <div class="mt-auto">
+                      <a href="#" class="read-more">Read more →</a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Add more service cards as needed -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- GenAiCards -->
+      <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h1 class="fs-4 fw-bold lh-sm">
+                        Revenues With Our Fintech Development Services
+                    </h1>
+                </div>
+                <div class="col-lg-8">
+                    <p class="fs-6">
+                        We offer comprehensive fintech software development services
+                        designed to elevate your business and increase your revenue. As a
+                        fintech software development agency, our expertise in end-to-end
+                        fintech application design and development ensures that your
+                        innovative ideas are transformed into agile and robust
+                        applications.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="gen-card">
+                        <div class="card-body-data">
+                            <img src="/assets/genAi3.svg" class="card-img-left" alt="AI Image">
+                            <div>
+                                <h5 class="card-title mb-2">
+                                    How can Gen AI accelerate and transform your SDLC?
+                                </h5>
+                                <p class="card-text">
+                                    The software development landscape is constantly evolving,
+                                    and the pressure...
+                                </p>
+                                <a href="#" class="read-more">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="gen-card">
+                        <div class="card-body-data">
+                            <img src="/assets/genAi3.svg" class="card-img-left" alt="AI Image">
+                            <div>
+                                <h5 class="card-title mb-2">
+                                    How can Gen AI accelerate and transform your SDLC?
+                                </h5>
+                                <p class="card-text">
+                                    The software development landscape is constantly evolving,
+                                    and the pressure...
+                                </p>
+                                <a href="#" class="read-more">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="gen-card">
+                        <div class="card-body-data">
+                            <img src="/assets/genAi2.svg" class="card-img-left" alt="AI Image">
+                            <div>
+                                <h5 class="card-title mb-2">
+                                    How can Gen AI accelerate and transform your SDLC?
+                                </h5>
+                                <p class="card-text">
+                                    The software development landscape is constantly evolving,
+                                    and the pressure...
+                                </p>
+                                <a href="#" class="read-more">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="gen-card">
+                        <div class="card-body-data">
+                            <img src="/assets/genAi2.svg" class="card-img-left" alt="AI Image">
+                            <div>
+                                <h5 class="card-title mb-2">
+                                    How can Gen AI accelerate and transform your SDLC?
+                                </h5>
+                                <p class="card-text">
+                                    The software development landscape is constantly evolving,
+                                    and the pressure...
+                                </p>
+                                <a href="#" class="read-more">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="gen-card">
+                        <div class="card-body-data">
+                            <img src="/assets/genAi3.svg" class="card-img-left" alt="AI Image">
+                            <div>
+                                <h5 class="card-title mb-2">
+                                    How can Gen AI accelerate and transform your SDLC?
+                                </h5>
+                                <p class="card-text">
+                                    The software development landscape is constantly evolving,
+                                    and the pressure...
+                                </p>
+                                <a href="#" class="read-more">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="gen-card">
+                        <div class="card-body-data">
+                            <img src="/assets/genAi3.svg" class="card-img-left" alt="AI Image">
+                            <div>
+                                <h5 class="card-title mb-2">
+                                    How can Gen AI accelerate and transform your SDLC?
+                                </h5>
+                                <p class="card-text">
+                                    The software development landscape is constantly evolving,
+                                    and the pressure...
+                                </p>
+                                <a href="#" class="read-more">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contactContainer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 contact-section">
+                    <h2 class="fs-4">
+                        Increase Your Business Revenues With Our Fintech Development
+                        Services
+                    </h2>
+
+                    <div class="contactInfoSection">
+                        <div class="contactInfo mt-5">
+                            <h4 class="fs-5">USA</h4>
+                            <p>Company name</p>
+                            <p>
+                                The software development landscape is constantly evolving, and
+                                the pressure...
+                            </p>
+                            <p>info@companyname.com</p>
+                            <p>+01 38293 22343</p>
+                        </div>
+
+                        <div class="contactInfo">
+                            <h4 class="fs-5">India</h4>
+                            <p>Company name</p>
+                            <p>
+                                The software development landscape is constantly evolving, and
+                                the pressure...
+                            </p>
+                            <p>info@companyname.com</p>
+                            <p>+01 38293 22343</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <p>
+                        We offer comprehensive fintech software development services
+                        designed to elevate your business and increase your revenue. As a
+                        fintech software development agency, our expertise in end-to-end
+                        fintech application design and development ensures that your
+                        innovative ideas are transformed into agile and robust
+                        applications.
+                    </p>
+
+                    <div class="formSection">
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <input
+                                        type="text"
+                                        class="form-control marginMobile formControl"
+                                        id="name"
+                                        placeholder="Your Name"
+                                    />
+                                </div>
+                                <div class="col-md-6">
+                                    <input
+                                        type="text"
+                                        class="form-control formControl"
+                                        id="phone"
+                                        placeholder="Phone Number"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <input
+                                        type="email"
+                                        class="form-control formControl"
+                                        id="email"
+                                        placeholder="Email Address"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <input
+                                        type="text"
+                                        class="form-control formControl"
+                                        id="company"
+                                        placeholder="Company Name"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <input
+                                        type="text"
+                                        class="form-control formControl"
+                                        id="location"
+                                        placeholder="Location"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <textarea
+                                        class="form-control formControl"
+                                        id="requirement"
+                                        rows="4"
+                                        placeholder="High-Level Requirement"
+                                    ></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submitBtn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infinite Scroll -->
+    <div>
+        <div class='container mt-5'>
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h1 class="fs-4 fw-bold lh-sm">
+                        Increase Your Business Revenues With Our Fintech Development
+                        Services
+                    </h1>
+                </div>
+                <div class="col-lg-8">
+                    <p class="fs-6">
+                        We offer comprehensive fintech software development services
+                        designed to elevate your business and increase your revenue. As a
+                        fintech software development agency, our expertise in end-to-end
+                        fintech application design and development ensures that your
+                        innovative ideas are transformed into agile and robust
+                        applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="marqueeContainer">
+            <div class="marquee">
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <!-- Repeat the rectangles to ensure continuous scrolling -->
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+            </div>
+            <div class="marquee-reverse">
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <!-- Repeat the rectangles to ensure continuous scrolling -->
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+                <div class="rectangle gray">
+                    <div class="topHalf"></div>
+                    <div class="bottomHalf"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fintech -->
+    <div class="container content-section">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-content">
+                <h2 class="mb-4">How Do Fintech Software Development Technologies Work with us</h2>
+                <p>
+                    The professionals at the Texas-based business DocTrace provide dependable engineering solutions to the construction industry and the general public. Due to the extensive document exchanges inherent in this procedure, the company set out to create a safe and user-friendly document management system for
+                </p>
+                <a href="#" class="read-more">
+                    Read more <span class="arrow">→</span>
+                </a>
+            </div>
+            <div class="col-md-8 image-content text-center">
+                <img src="/assets/fintechSoftware.svg" alt="Laptop image" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial Software -->
+    <div class="container my-5">
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h1 class="fs-4 fw-bold lh-sm">
+                        Increase Your Business Revenues With Our Fintech Development
+                        Services
+                    </h1>
+                </div>
+                <div class="col-lg-8">
+                    <p class="fs-6">
+                        We offer comprehensive fintech software development services
+                        designed to elevate your business and increase your revenue. As a
+                        fintech software development agency, our expertise in end-to-end
+                        fintech application design and development ensures that your
+                        innovative ideas are transformed into agile and robust
+                        applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 align-items-stretch" id="serviceCards">
+            <!-- Service cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Contacts -->
+    <div class="container my-4">
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h1 class="fs-4 fw-bold lh-sm">
+                        Increase Your Business Revenues With Our Fintech Development
+                        Services
+                    </h1>
+                </div>
+                <div class="col-lg-8">
+                    <p class="fs-6">
+                        We offer comprehensive fintech software development services
+                        designed to elevate your business and increase your revenue. As a
+                        fintech software development agency, our expertise in end-to-end
+                        fintech application design and development ensures that your
+                        innovative ideas are transformed into agile and robust
+                        applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-5" id="companyGrid">
+            <!-- Company cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container">
+        <footer class="footer border-top py-3">
+            <div class="row fw-bold">
+                <!-- Navigation Links -->
+                <div class="col-md-8">
+                    <ul class="nav justify-content-start flex-column flex-md-row">
+                        <li class="nav-item"><a href="#" class="nav-link px-2">About</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2">Solutions</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2">Industries</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2">Hire Developer</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2">Blogs</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2">Policy</a></li>
+                    </ul>
+                </div>
+                <!-- Copyright -->
+                <div class="col-md-4 d-flex align-items-center justify-content-md-end justify-content-center mt-3 mt-md-0">
+                    <span class="text-body-secondary">
+                        <a href="mailto:info@companyname.com" class="text-black text-decoration-none">Copyright © companyname.com</a>
+                    </span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function toggleNavbar() {
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse.classList.contains('show')) {
+                navbarCollapse.classList.remove('show');
+            } else {
+                navbarCollapse.classList.add('show');
+            }
+        }
+
+        const texts = [
+            "We are your next Product Development Partner",
+            "We bring your ideas to life with expertise",
+            "Innovative solutions for your business growth"
+        ];
+
+        let currentIndex = 0;
+        const heroTitle = document.getElementById('heroTitle');
+
+        function updateTitle() {
+            let index = 0;
+            heroTitle.innerText = '';
+            const intervalId = setInterval(() => {
+                heroTitle.innerText = texts[currentIndex].slice(0, index);
+                index++;
+                if (index > texts[currentIndex].length) {
+                    clearInterval(intervalId);
+                    setTimeout(() => {
+                        currentIndex = (currentIndex + 1) % texts.length;
+                        updateTitle();
+                    }, 5000);
+                }
+            }, 50);
+        }
+
+        updateTitle();
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+      const stickyColumn = document.getElementById('sticky-column');
+      const stickyWrapper = document.getElementById('sticky-wrapper');
+      const container = document.getElementById('container');
+
+      const updateSticky = () => {
+        if (window.innerWidth >= 992) {
+          const containerRect = container.getBoundingClientRect();
+          const stickyWrapperRect = stickyWrapper.getBoundingClientRect();
+          const stickyColumnRect = stickyColumn.getBoundingClientRect();
+
+          if (stickyWrapperRect.top <= 20) {
+            stickyColumn.classList.add('fixed');
+            stickyColumn.style.width = `${stickyWrapperRect.width}px`;
+            if (containerRect.bottom <= stickyColumnRect.bottom + 20) {
+              stickyColumn.style.top = `${containerRect.bottom - stickyColumnRect.height}px`;
+            } else {
+              stickyColumn.style.top = "20px";
+            }
+          } else {
+            stickyColumn.classList.remove('fixed');
+            stickyColumn.style.width = "";
+            stickyColumn.style.top = "";
+          }
+        } else {
+          stickyColumn.classList.remove('fixed');
+          stickyColumn.style.width = "";
+          stickyColumn.style.top = "";
+        }
+      };
+
+      window.addEventListener("scroll", updateSticky);
+      window.addEventListener("resize", updateSticky);
+      updateSticky();
+    });
+
+    </script>
+    <script>
+        const services = [
+            {
+                title: "Financial Software Development",
+                description: "Our financial software development services provide extensive technical and strategic support to fintech companies. We ensure your business objectives are met with precision."
+            },
+            {
+                title: "Mobile Banking Software Development",
+                description: "As a leading fintech software development company, we assist tech vendors in planning and implementing sophisticated mobile banking solutions. Our approach ensures the creation of secure and user-friendly mobile banking applications."
+            },
+            {
+                title: "Financial Software Development",
+                description: "Our financial software development services provide extensive technical and strategic support to fintech companies. We ensure your business objectives are met with precision."
+            },
+            {
+                title: "Mobile Banking Software Development",
+                description: "As a leading fintech software development company, we assist tech vendors in planning and implementing sophisticated mobile banking solutions. Our approach ensures the creation of secure and user-friendly mobile banking applications."
+            }
+        ];
+
+        let selectedCard = null;
+
+        function createServiceCard(service, index) {
+            const card = document.createElement('div');
+            card.className = 'col-md-6 d-flex';
+            card.innerHTML = `
+                <div class="service-card-finn w-100" data-index="${index}">
+                    <h3 class="service-title">${service.title}</h3>
+                    <p class="service-description">${service.description}</p>
+                    <span class="arrow-icon">→</span>
+                </div>
+            `;
+            return card;
+        }
+
+        function renderServiceCards() {
+            const container = document.getElementById('serviceCards');
+            services.forEach((service, index) => {
+                const card = createServiceCard(service, index);
+                container.appendChild(card);
+            });
+        }
+
+        function handleCardClick(event) {
+            const card = event.target.closest('.service-card-finn');
+            if (!card) return;
+
+            if (selectedCard) {
+                selectedCard.classList.remove('selected');
+                selectedCard.querySelector('.service-title').classList.remove('text-success');
+            }
+
+            card.classList.add('selected');
+            card.querySelector('.service-title').classList.add('text-success');
+            selectedCard = card;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderServiceCards();
+            document.getElementById('serviceCards').addEventListener('click', handleCardClick);
+        });
+    </script>
+    <script>
+        const companyData = [
+            { location: 'USA', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'India', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'India', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'USA', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'India', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+            { location: 'India', name: 'Company name', email: 'info@companyname.com', phone: '+01 38293 22343' },
+        ];
+
+        function createCompanyCard(company) {
+            return `
+                <div class="col-md-6 col-lg-4">
+                    <div class="company-card h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <p class="company-location fw-bold">${company.location}</p>
+                            <p>${company.name}</p>
+                            <p>The software development landscape is constantly evolving, and the pressure...</p>
+                        </div>
+                        <div class="contact-info">
+                            <p>${company.email}</p>
+                            <p>${company.phone}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCompanyGrid() {
+            const gridContainer = document.getElementById('companyGrid');
+            const gridHTML = companyData.map(company => createCompanyCard(company)).join('');
+            gridContainer.innerHTML = gridHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCompanyGrid);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

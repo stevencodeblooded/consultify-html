@@ -1,0 +1,128 @@
+.nav-link {
+  color: #000 !important;
+}
+
+.navbar {
+  padding: 1rem 0;
+  font-weight: 600;
+}
+
+.navContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbarCollapse {
+  transition: max-height 0.5s ease-out, opacity 0.4s ease-out;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.navbarCollapse.show {
+  max-height: 500px; /* Adjust this value based on your content */
+  opacity: 1;
+}
+
+.navbarNav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+.navItem {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.navLink {
+  color: black !important;
+  transition: color 0.3s ease;
+  text-decoration: none !important;
+  display: block;
+  padding: 0.5rem 0;
+}
+
+.navLink:hover {
+  color: #2fe647 !important;
+}
+
+.scheduleCall {
+  display: flex;
+  align-items: center;
+}
+
+.greenText {
+  color: #2fe647 !important;
+}
+
+.greenText:hover {
+  color: #20c936 !important;
+}
+
+.arrowIcon {
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+}
+
+.scheduleCall:hover .arrowIcon {
+  transform: translate(2px, -2px);
+}
+
+.navbarToggler {
+  border: none;
+  outline: none;
+  padding: 0.25rem 0.5rem;
+}
+
+.navbarToggler:focus {
+  box-shadow: none;
+}
+
+@media (min-width: 992px) {
+  .navContainer {
+      flex-direction: row;
+  }
+
+  .navbarHeader {
+      width: auto;
+  }
+
+  .navbarCollapse {
+      max-height: none !important;
+      opacity: 1 !important;
+      overflow: visible;
+      width: auto;
+  }
+
+  .navbarNav {
+      flex-direction: row;
+      align-items: center;
+      margin-top: 0;
+  }
+
+  .navItem {
+      margin-bottom: 0;
+      margin-left: 1rem;
+      width: auto;
+  }
+
+  .navLink {
+      padding: 0.5rem 0;
+  }
+
+  .navbarToggler {
+      display: none;
+  }
+}
