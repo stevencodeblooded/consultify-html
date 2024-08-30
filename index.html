@@ -6,6 +6,10 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+          overflow-x: hidden;
+        }
+        
         .nav-link {
             color: #000 !important;
         }
@@ -270,7 +274,7 @@
     }
 
     .give-border {
-      border: 1px solid #ccc;
+      border: 2px solid #ccc;
     }
 
     .imageWrapper {
@@ -398,6 +402,9 @@
             text-decoration: underline;
         }
 
+
+        /* Start from here  */
+
         .contactContainer {
             background-color: #f8f8f8;
         }
@@ -418,7 +425,7 @@
             padding: 10px;
             border-radius: 6px;
             background-color: white;
-            border: 1px solid #ced4da;
+            border: none;
         }
         
         .submitBtn {
@@ -441,7 +448,7 @@
             }
         }
 
-        .marqueeContainer {
+        /* .marqueeContainer {
             width: 100%;
             overflow: hidden;
             margin-block: 30px;
@@ -483,7 +490,76 @@
         @keyframes scroll-reverse {
             0% { transform: translateX(-50%); }
             100% { transform: translateX(0); }
+        } */
+
+        /* Marquee styles */
+      .marquee {
+        --gap: 1rem;
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        user-select: none;
+        gap: var(--gap);
+        width: 100%;
+      }
+
+      .marquee__content {
+        flex-shrink: 0;
+        display: flex;
+        gap: var(--gap);
+        min-width: 100%;
+      }
+
+      @keyframes scroll {
+        from {
+          transform: translateX(0);
         }
+        to {
+          transform: translateX(calc(-100% - var(--gap)));
+        }
+      }
+
+      /* Enable animation */
+      .enable-animation .marquee__content {
+        animation: scroll 20s linear infinite;
+      }
+
+      .marquee--reverse .marquee__content {
+        animation-direction: reverse;
+      }
+
+      /* Pause on hover for specific marquees */
+      .marquee--hover-pause:hover .marquee__content {
+        animation-play-state: paused;
+      }
+
+      .marquee__content > * {
+        flex: 0 0 auto;
+        border: 2px solid #ccc;
+        border-radius: 12px;
+        padding: 1rem;
+        text-align: center;
+        width: 250px;
+        height: 160px;
+      }
+
+      .marquee-container-div {
+        box-sizing: border-box;
+      }
+
+      .enable-animation {
+        margin-block: 2rem;
+      }
+
+      /* Mobile responsive adjustments */
+      @media (max-width: 768px) {
+        .marquee__content > * {
+          padding: 0.5rem;
+          width: 100px;
+          height: 70px;
+          font-size: 0.875rem;
+        }
+      }
 
         .content-section {
             /* padding: 2rem 0; */
@@ -573,12 +649,17 @@
         .contact-info p {
             margin-bottom: 0;
         }
+
+        .contact-infod p {
+          margin-bottom: 0px;
+        }
+
     </style>
 </head>
 <body>
     <!-- Navbar -->
-    <div>
-        <p class="container" style="font-size: 12px; text-align: right; margin-top: 2px;">
+    <div class="contact-infod">
+        <p class="container" style="font-size: 12px; text-align: right; margin-top: 5px;">
             India . United State . Bahamas
         </p>
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -616,11 +697,12 @@
                             <a href="#" class="navLink" onclick="toggleNavbar()">Blogs</a>
                         </li>
                         <li class="navItem">
-                            <a href="#" class="navLink scheduleCall greenText" onclick="toggleNavbar()">
-                                | Schedule call
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </a>
-                        </li>
+                          <a href="#" class="navLink scheduleCall greenText" onclick="toggleNavbar()">
+                              | Schedule call
+                              <span class="float-end" style="margin-left: 7px;"><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8.293 11.293a1 1 0 0 1 0-1.414L11.586 7H2a1 1 0 0 1 0-2h9.586L8.293 2.707a1 1 0 1 1 1.414-1.414l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0z"/></svg></span>
+                              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg> -->
+                          </a>
+                      </li>
                     </ul>
                 </div>
             </div>
@@ -707,7 +789,7 @@
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
-                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot"></span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-between mb-1">
@@ -726,8 +808,8 @@
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
-                      <span class="ratingDot empty"></span>
-                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-between mb-1">
@@ -768,7 +850,7 @@
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
-                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot"></span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-between mb-1">
@@ -787,8 +869,8 @@
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
-                      <span class="ratingDot empty"></span>
-                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-between mb-1">
@@ -829,7 +911,7 @@
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
-                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot"></span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-between mb-1">
@@ -848,8 +930,8 @@
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
                       <span class="ratingDot"></span>
-                      <span class="ratingDot empty"></span>
-                      <span class="ratingDot empty"></span>
+                      <span class="ratingDot"></span>
+                      <span class="ratingDot"></span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-between mb-1">
@@ -1226,8 +1308,10 @@
                                 The software development landscape is constantly evolving, and
                                 the pressure...
                             </p>
-                            <p>info@companyname.com</p>
-                            <p>+01 38293 22343</p>
+                            <div class="contact-info">
+                              <p>info@companyname.com</p>
+                              <p>+01 38293 22343</p>
+                            </div>
                         </div>
 
                         <div class="contactInfo">
@@ -1237,8 +1321,10 @@
                                 The software development landscape is constantly evolving, and
                                 the pressure...
                             </p>
-                            <p>info@companyname.com</p>
-                            <p>+01 38293 22343</p>
+                            <div class="contact-info">
+                              <p>info@companyname.com</p>
+                              <p>+01 38293 22343</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1259,7 +1345,7 @@
                                 <div class="col-md-6">
                                     <input
                                         type="text"
-                                        class="form-control marginMobile formControl"
+                                        class="form-control formControl"
                                         id="name"
                                         placeholder="Your Name"
                                     />
@@ -1348,94 +1434,53 @@
                 </div>
             </div>
         </div>
-        <div class="marqueeContainer">
-            <div class="marquee">
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <!-- Repeat the rectangles to ensure continuous scrolling -->
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-            </div>
-            <div class="marquee-reverse">
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <!-- Repeat the rectangles to ensure continuous scrolling -->
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-                <div class="rectangle gray">
-                    <div class="topHalf"></div>
-                    <div class="bottomHalf"></div>
-                </div>
-            </div>
-        </div>
+        <div class="marquee-container-div">
+          <!-- First marquee with hover-pause functionality -->
+          <section class="enable-animation">
+          <div class="marquee marquee--hover-pause">
+              <div class="marquee__content">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              </div>
+      
+              <div aria-hidden="true" class="marquee__content">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              </div>
+          </div>
+          </section>
+      
+          <!-- Second marquee with hover-pause functionality -->
+          <section class="enable-animation">
+          <div class="marquee marquee--reverse marquee--hover-pause">
+              <div class="marquee__content">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              </div>
+      
+              <div aria-hidden="true" class="marquee__content">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              </div>
+          </div>
+          </section>
+  </div>
     </div>
 
     <!-- Fintech -->
@@ -1549,8 +1594,8 @@
 
         const texts = [
             "We are your next Product Development Partner",
-            "We bring your ideas to life with expertise",
-            "Innovative solutions for your business growth"
+            "We bring your Ideas to Life with Expertise",
+            "Innovative Solutions for your Business Growth"
         ];
 
         let currentIndex = 0;
@@ -1690,7 +1735,7 @@
                         <div>
                             <p class="company-location fw-bold">${company.location}</p>
                             <p>${company.name}</p>
-                            <p>The software development landscape is constantly evolving, and the pressure...</p>
+                            <p class="company-detail">The software development landscape is constantly evolving, and the pressure...</p>
                         </div>
                         <div class="contact-info">
                             <p>${company.email}</p>
